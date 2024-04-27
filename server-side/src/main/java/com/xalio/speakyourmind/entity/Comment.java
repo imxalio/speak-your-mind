@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 import org.springframework.data.annotation.CreatedDate;
@@ -27,6 +29,8 @@ public class Comment {
 	@UuidGenerator
 	private UUID id;
 
+	@NotNull
+	@NotBlank
 	private String content;
 	@CreatedDate
 	private LocalDateTime createdAt;
