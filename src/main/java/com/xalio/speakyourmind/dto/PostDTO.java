@@ -30,5 +30,6 @@ public class PostDTO {
 
 	private List<Comment> commentList;
 
-	private Integer upVote = 1;
+	private Integer upVote;
+	
 }

@@ -69,5 +69,15 @@ class PostServiceImpTest {
 		                           .getContent()).isEqualTo(commentDTO.getContent());
 	}
 
+	@Test
+	void testPatchPostUpVote() throws NotFoundException {
+		Post post = postRepository.findAll()
+		                          .get(0);
+		postServiceImp.patchPostUpVote(post.getId());
+		Post postAfterUpVote = postRepository.findById(post.getId())
+		                                     .get();
+		assertThat(postAfterUpVote.getUpVote()).isEqualTo(post.getUpVote() + 1);
+	}
+
 
 }

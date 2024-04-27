@@ -37,6 +37,6 @@ public class Post {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Comment> commentList;
 
-	private Integer upVote = 1;
+	private Integer upVote;
 
 }

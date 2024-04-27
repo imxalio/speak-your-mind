@@ -28,7 +28,7 @@ public class PostServiceImp {
 		return postRepository.findAll()
 		                     .stream()
 		                     .map(postMapper::postToPostDto)
-		                     .collect(Collectors.toUnmodifiableList());
+		                     .collect(Collectors.toList());
 	}
 
 	public Post getPostById(UUID id) throws NotFoundException {
@@ -37,6 +37,7 @@ public class PostServiceImp {
 	}
 
 	public void newPost(PostDTO postDTO) {
+		postDTO.setUpVote(1);
 		postRepository.save(postMapper.postDtoToPost(postDTO));
 
 	}
@@ -45,6 +46,12 @@ public class PostServiceImp {
 		Post post = getPostById(id);
 		post.getCommentList()
 		    .add(commentMapper.commentDtoToComment(commentDTO));
+		postRepository.save(post);
+	}
+
+	public void patchPostUpVote(UUID id) throws NotFoundException {
+		Post post = getPostById(id);
+		post.setUpVote(post.getUpVote() + 1);
 		postRepository.save(post);
 	}
 }

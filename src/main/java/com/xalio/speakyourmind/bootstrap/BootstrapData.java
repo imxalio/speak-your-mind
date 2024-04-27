@@ -22,18 +22,25 @@ public class BootstrapData implements CommandLineRunner {
 		Post post1 = Post.builder()
 		                 .title("Title 1")
 		                 .description("Description 1")
+		                 .upVote(1)
 		                 .build();
 		Post post2 = Post.builder()
 		                 .title("Title 2")
 		                 .description("Description 2")
+		                 .upVote(1)
+
 		                 .build();
 		Post post3 = Post.builder()
 		                 .title("Title 3")
 		                 .description("Description 3")
+		                 .upVote(1)
+
 		                 .build();
 		Post post4 = Post.builder()
 		                 .title("Title 4")
 		                 .description("Description 4")
+		                 .upVote(1)
+
 		                 .build();
 
 		postRepository.save(post1);
