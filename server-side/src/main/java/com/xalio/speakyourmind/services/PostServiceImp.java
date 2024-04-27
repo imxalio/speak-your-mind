@@ -3,7 +3,6 @@ package com.xalio.speakyourmind.services;
 
 import com.xalio.speakyourmind.dto.CommentDTO;
 import com.xalio.speakyourmind.dto.PostDTO;
-import com.xalio.speakyourmind.entity.Post;
 import com.xalio.speakyourmind.mappers.CommentMapper;
 import com.xalio.speakyourmind.mappers.PostMapper;
 import com.xalio.speakyourmind.repositories.PostRepository;
@@ -31,9 +30,9 @@ public class PostServiceImp {
 		                     .collect(Collectors.toList());
 	}
 
-	public Post getPostById(UUID id) throws NotFoundException {
-		return postRepository.findById(id)
-		                     .orElseThrow(NotFoundException::new);
+	public PostDTO getPostById(UUID id) throws NotFoundException {
+		return postMapper.postToPostDto(postRepository.findById(id)
+		                                              .orElseThrow(NotFoundException::new));
 	}
 
 	public void newPost(PostDTO postDTO) {
@@ -43,15 +42,15 @@ public class PostServiceImp {
 	}
 
 	public void newComment(UUID id, CommentDTO commentDTO) throws NotFoundException {
-		Post post = getPostById(id);
+		PostDTO post = getPostById(id);
 		post.getCommentList()
 		    .add(commentMapper.commentDtoToComment(commentDTO));
-		postRepository.save(post);
+		postRepository.save(postMapper.postDtoToPost(post));
 	}
 
 	public void patchPostUpVote(UUID id) throws NotFoundException {
-		Post post = getPostById(id);
+		PostDTO post = getPostById(id);
 		post.setUpVote(post.getUpVote() + 1);
-		postRepository.save(post);
+		postRepository.save(postMapper.postDtoToPost(post));
 	}
 }

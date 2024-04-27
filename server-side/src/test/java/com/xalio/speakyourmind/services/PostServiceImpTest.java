@@ -34,7 +34,7 @@ class PostServiceImpTest {
 	void testGetPostById() throws NotFoundException {
 		Post post = postRepository.findAll()
 		                          .get(0);
-		Post getPost = postServiceImp.getPostById(post.getId());
+		PostDTO getPost = postServiceImp.getPostById(post.getId());
 		assertThat(getPost).isNotNull();
 	}
 
@@ -62,7 +62,7 @@ class PostServiceImpTest {
 		                                  .content("First comment here")
 		                                  .build();
 		postServiceImp.newComment(post.getId(), commentDTO);
-		Post postAfterComment = postServiceImp.getPostById(post.getId());
+		PostDTO postAfterComment = postServiceImp.getPostById(post.getId());
 		assertThat(postAfterComment.getCommentList()).isNotEmpty();
 		assertThat(postAfterComment.getCommentList()
 		                           .get(0)
