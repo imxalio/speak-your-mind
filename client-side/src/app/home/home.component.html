@@ -1,0 +1,63 @@
+<app-nav-bar></app-nav-bar>
+
+<!-- Open the modal using ID.showModal() method -->
+<button
+  class="btn btn-error text-3xl font-bold mb-10 w-full"
+  onclick="my_modal_1.showModal()"
+>
+  Add New Post
+</button>
+
+<dialog id="my_modal_1" class="modal">
+  <div class="modal-box text-left">
+    <h2 class="font-bold text-xl">Speak Your Mind!</h2>
+    <p class="py-4">
+      Share your thoughts, ideas, or experiences. Let your voice be heard!
+    </p>
+    <div class="modal-action justify-center">
+      <form class="w-full" method="dialog">
+        <app-new-post></app-new-post>
+        <button class="btn btn-info btn-outline">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+<div class="grid gap-10" *ngIf="posts && posts.length > 0">
+  <div *ngFor="let post of posts">
+    <div class="">
+      <h3 class="text-center text-3xl text-teal-100 px-5 mb-3 font-bold">
+        {{ post.title }}
+      </h3>
+      <div class="flex gap-3 mb-3 items-center">
+        <p>
+          Posted by: <strong class="text-lg">{{ post.username }}</strong>
+        </p>
+        <p>{{ post.createdAt | date : "yyyy-MM-dd HH:mm:ss" }}</p>
+      </div>
+
+      <p class="text-xl text-white text-center description">
+        {{ post.description }}
+      </p>
+      <div class="flex items-center gap-5 p-6">
+        <button
+          class="text-xl w-1/4 btn btn-warning text-cyan-950"
+          [disabled]="post.hasVoted"
+          (click)="upvotePost(post.id)"
+        >
+          ⬆ Up {{ post.upVote }}
+        </button>
+        <button
+          class="btn btn-accent text-xl w-3/4"
+          (click)="viewPost(post.id)"
+        >
+          View Post
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!posts || posts.length === 0">
+  <p>No posts available.</p>
+</div>

@@ -1,0 +1,70 @@
+<form class="grid gap-6 mb-10" #postForm="ngForm" (ngSubmit)="submitPost()">
+  <div class="flex flex-col gap-2">
+    <label class="text-xl" for="username">Username:</label>
+    <input
+      class="input input-bordered input-accent w-full max-w text-xl"
+      type="text"
+      id="username"
+      [(ngModel)]="newPost.username"
+      name="username"
+      required
+      placeholder="@random"
+      #usernameInput="ngModel"
+    />
+    <div
+      *ngIf="
+        usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)
+      "
+      class="text-rose-500"
+    >
+      Username is required
+    </div>
+  </div>
+  <div class="flex flex-col gap-2">
+    <label class="text-xl" for="title">Title:</label>
+    <input
+      class="input input-bordered input-accent w-full max-w text-xl"
+      type="text"
+      id="title"
+      [(ngModel)]="newPost.title"
+      name="title"
+      required
+      placeholder="Title"
+      #titleInput="ngModel"
+    />
+    <div
+      *ngIf="titleInput.invalid && (titleInput.dirty || titleInput.touched)"
+      class="text-rose-500"
+    >
+      Title is required
+    </div>
+  </div>
+  <div class="flex flex-col gap-2">
+    <label class="text-xl" for="description">Description:</label>
+    <textarea
+      class="input input-bordered input-accent w-full max-w text-xl h-36 resize-none border rounded-md p-2"
+      id="description"
+      [(ngModel)]="newPost.description"
+      name="description"
+      required
+      placeholder="What's in your mind?"
+      #descriptionInput="ngModel"
+    ></textarea>
+    <div
+      *ngIf="
+        descriptionInput.invalid &&
+        (descriptionInput.dirty || descriptionInput.touched)
+      "
+      class="text-rose-500"
+    >
+      Description is required
+    </div>
+  </div>
+  <button
+    class="btn btn-warning text-cyan-950 text-2xl"
+    type="submit"
+    [disabled]="postForm.invalid"
+  >
+    Create Post
+  </button>
+</form>

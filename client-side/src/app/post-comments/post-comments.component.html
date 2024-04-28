@@ -1,0 +1,57 @@
+<div class="">
+  <h1 class="text-2xl font-bold mb-2">Comments:</h1>
+  <form #postFrom="ngForm" class="grid p-2 mb-5">
+    <input
+      class="input input-bordered input-accent w-full max-w-xs text-lg mb-2"
+      type="text"
+      [(ngModel)]="commentDTO.username"
+      name="username"
+      required
+      placeholder="@random"
+      #usernameInput="ngModel"
+    />
+    <div
+      *ngIf="
+        usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)
+      "
+      class="text-rose-500 mb-3"
+    >
+      Username is required
+    </div>
+    <textarea
+      class="mb-2 w-full textarea-accent h-36 resize-none border rounded-md p-2"
+      [(ngModel)]="commentDTO.content"
+      name="content"
+      required
+      placeholder="What's your though?"
+      #commentInput="ngModel"
+    ></textarea>
+
+    <div
+      *ngIf="
+        commentInput.invalid && (commentInput.dirty || commentInput.touched)
+      "
+      class="text-rose-500 mb-3"
+    >
+      Description is required
+    </div>
+
+    <button
+      class="btn btn-warning text-cyan-950 text-2xl"
+      (click)="addComment()"
+      [disabled]="postFrom.invalid"
+    >
+      Add Comment
+    </button>
+  </form>
+
+  <div class="" *ngFor="let comment of comments">
+    <div class="bg-cyan-100 text-primary-content rounded-lg p-3 mb-5">
+      <p>{{ comment.username }}</p>
+      <p class="text-xl mb-3">{{ comment.content }}</p>
+      <p class="text-sm">
+        {{ comment.createdAt | date : "yyyy-MM-dd HH:mm:ss" }}
+      </p>
+    </div>
+  </div>
+</div>

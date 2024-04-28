@@ -1,0 +1,25 @@
+<div *ngIf="post" class="mb-10">
+  <h2 class="text-center text-3xl text-teal-100 px-5 mb-3 font-bold">
+    {{ post.title }}
+  </h2>
+  <p class="flex gap-3 mb-3 items-center text-xl">{{ post.description }}</p>
+  <div class="flex gap-3 mb-3 items-center">
+    <p>
+      Posted by: <strong class="text-lg">{{ post.username }}</strong>
+    </p>
+    <p>{{ post.createdAt | date : "yyyy-MM-dd HH:mm:ss" }}</p>
+  </div>
+  <button
+    class="text-xl btn btn-warning text-cyan-950"
+    [disabled]="post.hasVoted"
+    (click)="upvotePost()"
+  >
+    ⬆ Up {{ post.upVote }}
+  </button>
+
+  <div *ngIf="!post">
+    <p>No post available.</p>
+  </div>
+</div>
+
+<app-post-comments></app-post-comments>

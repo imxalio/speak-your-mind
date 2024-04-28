@@ -1,9 +1,10 @@
 package com.xalio.speakyourmind.services;
 
-import com.xalio.speakyourmind.dto.CommentDTO;
-import com.xalio.speakyourmind.dto.PostDTO;
-import com.xalio.speakyourmind.entity.Post;
-import com.xalio.speakyourmind.repositories.PostRepository;
+import com.xalio.speakyourmind.comment.CommentDTO;
+import com.xalio.speakyourmind.post.Post;
+import com.xalio.speakyourmind.post.PostDTO;
+import com.xalio.speakyourmind.post.PostRepository;
+import com.xalio.speakyourmind.post.PostServiceImp;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -62,7 +63,8 @@ class PostServiceImpTest {
 		                                  .content("First comment here")
 		                                  .build();
 		postServiceImp.newComment(post.getId(), commentDTO);
-		PostDTO postAfterComment = postServiceImp.getPostById(post.getId());
+		Post postAfterComment = postRepository.findById(post.getId())
+		                                      .get();
 		assertThat(postAfterComment.getCommentList()).isNotEmpty();
 		assertThat(postAfterComment.getCommentList()
 		                           .get(0)
