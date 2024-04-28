@@ -1,41 +1,64 @@
 # SpeakYourMind API
 
-## Overview
-This API provides endpoints for managing posts and comments in the SpeakYourMind platform.
+SpeakYourMind is a RESTful API for posting and commenting.
 
-## Technologies Used
-- Java
-- Spring Boot
-- Swagger UI
+## Table of Contents
+
+1. [Installation](#installation)
+2. [Endpoints](#endpoints)
+3. [Dependencies](#dependencies)
+4. [Angular Frontend](#angular-frontend)
+5. [Swagger UI](#swagger-ui)
+6. [Contributing](#contributing)
+7. [License](#license)
 
 ## Installation
-1. Clone the repository: `git clone [repository_url]`
-2. Navigate to the project directory: `cd speak-your-mind`
-3. Build the project: `./mvnw clean install`
 
-## Usage
-1. Start the application: `./mvnw spring-boot:run`
-2. Access the Swagger UI for API documentation: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/xalio/SpeakYourMind.git
 
-## Endpoints
+# Endpoints
 
-### GET /api/v1/post/
-- Description: Retrieve all posts.
+## Posts
 
-### GET /api/v1/post/{id}
-- Description: Retrieve a post by ID.
-- Path Variable: id (UUID) - The ID of the post to retrieve.
+- **GET /api/v1/post/**: Retrieve all posts.
+- **GET /api/v1/post/{id}**: Retrieve a post by ID.
+- **POST /api/v1/post/new**: Create a new post.
+- **POST /api/v1/post/vote/{id}**: Upvote a post.
 
-### POST /api/v1/post/
-- Description: Create a new post.
-- Request Body: PostDTO object.
+## Comments
 
-### POST /api/v1/post/{id}/comment
-- Description: Add a comment to a post.
-- Path Variable: id (UUID) - The ID of the post to add the comment to.
-- Request Body: CommentDTO object.
+- **GET /api/v1/post/{id}/comments**: Retrieve comments for a post by ID.
+- **POST /api/v1/post/{id}/comment**: Add a new comment to a post.
 
-### POST /api/v1/post/{id}
-- Description: Upvote a post.
-- Path Variable: id (UUID) - The ID of the post to upvote.
+# Dependencies
+
+- Spring Boot Starter Data JPA
+- Spring Boot Starter Validation
+- Spring Boot Starter Web
+- MySQL Connector/J
+- Lombok
+- Spring Boot Starter Test
+- MapStruct
+- Springdoc OpenAPI
+
+# Angular Frontend
+
+The Angular frontend for SpeakYourMind is available in the `client-side` directory. Follow the instructions in the
+README file located there to set up and run the frontend application.
+
+# Swagger UI
+
+Swagger UI is integrated into the SpeakYourMind API for easy documentation and testing. Once the server is running, you
+can access the Swagger UI interface
+at [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html).
+
+# Contributing
+
+Contributions are welcome! Please feel free to open issues or pull requests.
+
+# License
+
+This project is licensed under the [MIT License](LICENSE).
 
