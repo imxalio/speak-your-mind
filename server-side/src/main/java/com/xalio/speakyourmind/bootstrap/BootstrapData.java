@@ -4,6 +4,7 @@ package com.xalio.speakyourmind.bootstrap;
 import com.xalio.speakyourmind.post.Post;
 import com.xalio.speakyourmind.post.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -13,9 +14,16 @@ public class BootstrapData implements CommandLineRunner {
 
 	private final PostRepository postRepository;
 
+	@Value("${application.runner.enabled}")
+	private boolean runnerEnabled;
+
+
 	@Override
 	public void run(String... args) throws Exception {
-		bootstrapData();
+
+		if (runnerEnabled) {
+			bootstrapData();
+		}
 	}
 
 	public void bootstrapData() {

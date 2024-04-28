@@ -2,8 +2,9 @@ package com.xalio.speakyourmind.comment;
 
 
 import com.xalio.speakyourmind.post.PostServiceImp;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class CommentController {
 	}
 
 	@PostMapping("{id}/comment")
-	public void newComment(@PathVariable("id") UUID id, @RequestBody CommentDTO commentDTO) throws ChangeSetPersister.NotFoundException {
+	public void newComment(@PathVariable("id") UUID id, @Valid @RequestBody CommentDTO commentDTO) throws NotFoundException {
 		postServiceImp.newComment(id, commentDTO);
 	}
 }

@@ -10,10 +10,7 @@ import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.Base64;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -92,13 +89,18 @@ public class PostServiceImp {
 	}
 
 	// Check if the user reacted or not and edit hasVoted depends on that
-	private boolean hasUserReacted(Post post) {
+	public boolean hasUserReacted(Post post) {
 		if (post != null) {
+			if (post.getUpVotedIPs() == null) {
+				post.setUpVotedIPs(new HashSet<>()); // Initialize the collection if it's null
+			}
 			String userIpAddress = request.getRemoteAddr();
 			String encodedUserIpAddress = Base64.getEncoder()
 			                                    .encodeToString(userIpAddress.getBytes());
-			return post.getUpVotedIPs()
-			           .contains(encodedUserIpAddress);
+			if (post.getUpVotedIPs()
+			        .contains(encodedUserIpAddress)) {
+				return true;
+			}
 		}
 		return false;
 	}

@@ -1,6 +1,7 @@
 package com.xalio.speakyourmind.post;
 
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class PostController {
 
 
 	@PostMapping("new")
-	public void newPost(@RequestBody PostDTO postDTO) {
+	public void newPost(@Valid @RequestBody PostDTO postDTO) {
 		postServiceImp.newPost(postDTO);
 	}
 
