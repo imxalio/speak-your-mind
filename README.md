@@ -37,7 +37,7 @@ SpeakYourMind is a RESTful API for posting and commenting.
 - Spring Boot Starter Data JPA
 - Spring Boot Starter Validation
 - Spring Boot Starter Web
-- MySQL Connector/J
+- PostgreSQL Connector/J
 - Lombok
 - Spring Boot Starter Test
 - MapStruct
