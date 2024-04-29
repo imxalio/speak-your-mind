@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../service/api.service';
+import { NewPostComponent } from '../new-post/new-post.component';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +10,7 @@ import { ApiService } from '../service/api.service';
 })
 export class HomeComponent implements OnInit {
   posts: any[] = [];
+  posted: boolean = false;
 
   constructor(private apiService: ApiService, private router: Router) {}
 
@@ -19,7 +21,6 @@ export class HomeComponent implements OnInit {
   fetchAllPosts(): void {
     this.apiService.getAllPosts().subscribe(
       (response: any[]) => {
-        console.log(response);
         this.posts = response;
       },
       (error) => {
@@ -46,5 +47,13 @@ export class HomeComponent implements OnInit {
         console.error('Error upVoting post:', error);
       }
     );
+  }
+
+  newPostPosted(): void {
+    this.posted = true;
+  }
+
+  closeForm(): void {
+    this.posted = false;
   }
 }

@@ -14,10 +14,15 @@
     <p class="py-4">
       Share your thoughts, ideas, or experiences. Let your voice be heard!
     </p>
+    <div *ngIf="posted" class="text-red-500 text-2xl text-center">
+      Your post was posted successfully
+    </div>
     <div class="modal-action justify-center">
       <form class="w-full" method="dialog">
         <app-new-post></app-new-post>
-        <button class="btn btn-info btn-outline">Close</button>
+        <button (click)="closeForm()" class="btn btn-info btn-outline">
+          Close
+        </button>
       </form>
     </div>
   </div>
