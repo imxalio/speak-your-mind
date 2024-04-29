@@ -25,8 +25,10 @@ public class PostServiceImp {
 
 	public List<PostDTO> getAllPosts() {
 
-		return postRepository.findAll(Sort.by("upVote")
-		                                  .descending())
+		return postRepository.findAll(Sort.by(
+				                     Sort.Order.desc("upVote"),
+				                     Sort.Order.desc("createdAt")
+		                     ))
 		                     .stream()
 		                     .map(post -> {
 			                     PostDTO postDTO = postMapper.postToPostDto(post);

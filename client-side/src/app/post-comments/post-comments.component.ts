@@ -41,7 +41,10 @@ export class PostCommentsComponent implements OnInit {
     if (this.postId) {
       this.apiService.addCommentToPost(this.postId, this.commentDTO).subscribe(
         (newComment: CommentDTO) => {
-          console.log(this.commentDTO + ' posted');
+          this.commentDTO = {
+            content: '',
+            username: '@random',
+          };
           this.fetchComments();
         },
         (error) => console.log('Error posting comments', error)

@@ -10,10 +10,7 @@ import { ApiService } from '../service/api.service';
 export class HomeComponent implements OnInit {
   posts: any[] = [];
 
-  constructor(
-    private apiService: ApiService,
-    private router: Router,
-  ) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit(): void {
     this.fetchAllPosts();
@@ -27,7 +24,7 @@ export class HomeComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching posts:', error);
-      },
+      }
     );
   }
 
@@ -38,6 +35,7 @@ export class HomeComponent implements OnInit {
   upvotePost(postId: string): void {
     this.apiService.upvotePost(postId).subscribe(
       () => {
+        this.fetchAllPosts();
         const index = this.posts.findIndex((post) => post.id === postId);
         if (index !== -1) {
           this.posts[index].upVote++;
@@ -46,7 +44,7 @@ export class HomeComponent implements OnInit {
       },
       (error) => {
         console.error('Error upVoting post:', error);
-      },
+      }
     );
   }
 }
