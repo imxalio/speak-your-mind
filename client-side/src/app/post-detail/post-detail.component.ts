@@ -31,7 +31,6 @@ export class PostDetailComponent implements OnInit {
       this.apiService.getPostById(postId).subscribe(
         (response: any) => {
           this.post = response;
-          console.log(response);
         },
         (error) => {
           console.error('Error fetching post details:', error);
